@@ -2,7 +2,7 @@
  <html>
  <body>
  <div name="top" align="center">
- 	<img src="images/top.jpg" width="1500" height="150"/>
+ 	<img src="images/accenture-logo.jpg" width="1500" height="150"/>
  </div>
  <div name="middle" align="center">
  <table>
@@ -13,6 +13,7 @@
 		$db="ad_bb6ddb2f34daf52";
 		$conn=new mysqli($server, $user, $pass, $db);
 		if($conn->connect_error){
+			echo  $con;
 			die("Connection Failed: ".$conn->connect_error);
 		}
 		$sql="select * from servicios";
@@ -45,7 +46,7 @@
 	  </table>
 	 </div>
  <div name="bottom" align="center">
- 	<img src="images/top.jpg" width="1500" height="150"/>
+ 	<img src="images/capgemini-logo.jpg" width="1500" height="150"/>
  </div>
   
  </body>
