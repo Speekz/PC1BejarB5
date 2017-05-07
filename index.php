@@ -1,53 +1,81 @@
+<?php $numberow = 0;
+?>
 <!DOCTYPE html>
  <html>
+ <head>
+ <title>PC1 JOHAN BEJAR</title>
+ <link rel="stylesheet"  href="style.css">
+ </head>
  <body>
  <div name="top" align="center">
- 	<img src="images/accenture-logo.jpg" width="1500" height="150"/>
+ 	<img src="images/accenture-logo.jpg" width="250" height="150"/>
+ 	<img src="images/capgemini-logo.jpg" width="250" height="150"/>
+ 	<img src="images/deloitte_logo.jpg" width="250" height="150"/>
+ 	<img src="images/Teradata-logo.jpg" width="250" height="150"/>
  </div>
- <div name="middle" align="center">
- <table>
+ <div name="middle" class="body_container" >
+ <div class="row">
 	  	<?php
-		$server="us-cdbr-iron-east-03.cleardb.net";
-		$user="b74ba3320e82ec";
-		$pass="2d194843";
-		$db="ad_bb6ddb2f34daf52";
-		$conn=new mysqli($server, $user, $pass, $db);
-		if($conn->connect_error){
-			echo  $con;
-			die("Connection Failed: ".$conn->connect_error);
-		}
-		$sql="select * from servicios";
-		$result=$conn->query($sql);
+		include 'db_connection.php';
+		include 'db_query.php';
 		if($result->num_rows > 0){
 			?>
-			<tr>
-				<th>Codigo</th>
-				<th>Nombre</th>
-				<th>Descripcion</th>
-				<th>Imagen</th>
-			</tr>
-			<?php
-			while($row=$result->fetch_assoc()){
-				?>
-				<tr>
-					<td><?php echo $row['codigo_servicio']?></td>
-					<td><?php echo $row['nombre_servicio']?></td>
-					<td><?php echo $row['descripcion_servicio']?></td>
-					<td><img src="<?php echo $row['imagen_servicio']?>"/></td>
-				</tr>
+		<div class="col_control">	
+			<div class="col-sm-6 col">
+				<h3>For data scientists</h3>
 				<?php
-			}
-		}
-		else{
-			echo "0 result";
-		}
-		$conn->close();
-		?>
-	  </table>
-	 </div>
- <div name="bottom" align="center">
- 	<img src="images/capgemini-logo.jpg" width="1500" height="150"/>
+					while($row=$result->fetch_assoc() and $numberow < 3){ ?>
+					<div>
+						<div class="icon">
+							<img src="<?php echo $row['imagen_servicio']?>"/>
+						</div>
+						<div>
+							<p>
+								<b><?php echo $row['nombre_servicio']?></b>
+							</p>
+							<p><?php echo $row['descripcion_servicio']?></p>
+						</div>
+					</div>
+					<?php
+						$numberow = $numberow + 1;
+						}
+						$conn->close();
+					?>
+			</div>
+			<div class="col-sm-6 col">	
+				<h3>For IT professionals</h3>
+				<?php
+				$numberow = 0;
+				include 'db_connection.php';
+				include 'db_query.php';
+					while($row=$result->fetch_assoc()){
+						if($numberow >2)
+						{
+						?>
+					<div>
+						<div class="icon">
+							<img class="max-height:100%; max-width:100%;" src="<?php echo $row['imagen_servicio']?>"/>
+						</div>
+						<div>
+							<p>
+								<b><?php echo $row['nombre_servicio']?></b>
+							</p>
+							<p><?php echo $row['descripcion_servicio']?></p>
+						</div>
+					</div>
+					<?php
+						}
+						$numberow = $numberow + 1;
+						}
+						$conn->close();
+					}
+					?>
+			 </div>
+		</div>
+		</div>
  </div>
-  
+ <div name="bottom" align="center">
+ 	<img src="images/Imagen2.PNG" width="1000" height="300"/>
+ </div>
  </body>
  </html>
